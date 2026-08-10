@@ -8,22 +8,33 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    <!-- ชื่อ tap หน้าระบบที่เราสร้าง เช่น ชื่อ web! หรืออื่นๆ -->
     <title>web!</title>
   </head>
   <body>
+    
+    <!-- สร้างหน้าพื้นหลังของ banner -->
   <div class="container-fluid" style=" background-image: url(images/bk04.png); height: 450px; background-repeat: no-repeat; background-size: cover">
-  <div class="container" style="color:rgb(105, 104, 101); text-align: right;">
-    <div style="padding-top: 200px; font-size: 40px; font-size:30px;"> ระบบเช็คชื่อนักเรียน
+    
+    <!-- สร้างชื่อเว็บที่เราสร้าง เช่น ระบบเข้าเรียน -->
+    <div class="container" style="color:rgb(105, 104, 101); text-align: right;">
+      
+      <!-- เป็นรูปแบบ ขนาดอักษร ชื่อ -->
+      <div style="padding-top: 200px; font-size: 40px; font-size:30px;"> ระบบเช็คชื่อนักเรียน
 
-    </div style="font-size: 200px; font-size: 40px;"> Check <span style="color:brown ;">เวลาเข้าโรงเรียน</span>
+        <!-- สร้างรูแบบ อักษร หน้าสีขาว หลังสีแดง -->
+        </div style="font-size: 200px; font-size: 40px;"> Check <span style="color:brown ;">เวลาเข้าโรงเรียน</span>
     <div>
-      <div style="padding-top: 10px;"><button type="button" class="btn btn-primary btn-lg" style="background-color: brown; border: none; border-radius: 20px; font-size: 14px;" >CheckIN</button></div>
+      
+      <!-- สร้างปุ่ม เข้าหน้าเช็คระบบ -->
+      <div style="padding-top: 10px;"><button type="button" class="btn btn-primary btn-lg" style="background-color: brown; border: none; 
+      border-radius: 20px; font-size: 14px;" >CheckIN</button></div>
       
     </div>
   </div>
   
 </div>
-
+  <!-- สร้างหัวข้อและข้อความ  -->
 <div class="container">
   <div class="row">
     <div class="col-10 offset-1" style="text-align: center; padding-top: 32px;">
@@ -44,7 +55,7 @@
 
   </div>
 
-
+  <!-- สร้างบล๊อกใส่ภาพและข้อมูลที่จะใส่ -->
   <div class="row g-0 " style="padding-top: 56px;">
     <div class="col-7" style="background-color: darkgoldenrod;" >
       <img src="images/p01.png" class="img-fluid w-100">
@@ -55,19 +66,56 @@
 
     </div>
   </div>
+  <br>
 
-
+  <!-- สร้างหัวข้อถัดไป -->
   <div class="container" >
-    <div class="row" style="padding-top:  40px;">
+    <div class="row" style="padding-top:  40px 0;">
       <div class="col" style="font-size:24px ; font-weight: bold;"> รายการอื่นๆ</div>
+    </div><br>
+  </div>
+
+  <!-- สร้างเมนูขั้นตอนและรายละเอียดการใช้งานระบบ -->
+  <div class="row">
+    <div class="col-md-4 col-sm-12" style="background-color: rgb(252, 250, 250);">
+      <div><img src="images/ps001.png" class="img-fluid w-100">
+      </div>
+     <div style="padding-top: 16px;">
+      <h6 style="font-size: 18px;">แยกภาพตามแต่ละขั้นตอน </h6>
+      <span style="font-size: 14px; color: rgb(21, 22, 22);">เช่นขั้นตอนที่ 1 — เข้าสู่ระบบ</span>
+     </div>
+    </div>
+     <div class="col-md-4 col-sm-12" style="background-color: rgb(252, 250, 250);">
+      <div><img src="images/ps002.png" class="img-fluid w-100">
+      </div>
+     <div style="padding-top: 16px;">
+      <h6 style="font-size: 18px;">แยกภาพตามแต่ละขั้นตอน </h6>
+      <span style="font-size: 14px; color: rgb(21, 22, 22);">เช่นขั้นตอนที่ 1 — เข้าสู่ระบบ</span>
+     </div>
+    </div>
+     <div class="col-md-4 col-sm-12" style="background-color: rgb(252, 250, 250); ">
+      <div><img src="images/ps003.png" class="img-fluid w-100" >
+      </div>
+     <div style="padding-top: 16px;">
+      <h6 style="font-size: 18px;">แยกภาพตามแต่ละขั้นตอน </h6>
+      <span style="font-size: 14px; color: rgb(21, 22, 22);">เช่นขั้นตอนที่ 1 — เข้าสู่ระบบ</span>
+     </div>
     </div>
   </div>
-  
 
 </div>
 
 
+<div class="container-fluid">
+  <div class="row" style="padding-top: 48px;">
+    <div class="col">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.12485972546!2d101.23510017499606!3d6.875640393123149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31b303f63c31a0b5%3A0x1b7b0663dc0a2abd!2z4LmC4Lij4LiH4LmA4Lij4Li14Lii4LiZ4Liq4Liy4LiY4Li04LiV4Lih4Lir4Liy4Lin4Li04LiX4Lii4Liy4Lil4Lix4Lii4Liq4LiH4LiC4Lil4Liy4LiZ4LiE4Lij4Li04LiZ4LiX4Lij4LmMIOC4neC5iOC4suC4ouC4oeC4seC4mOC4ouC4oeC4qOC4tuC4geC4qeC4sg!5e0!3m2!1sth!2sth!4v1786379982883!5m2!1sth!2sth" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+  </div>
+</div>
 
+
+<br><br><br>
 
 
 
