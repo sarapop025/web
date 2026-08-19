@@ -1,0 +1,258 @@
+1. ER-Diagram ของระบบจองห้อง
+┌──────────────────────┐
+│        roles         │
+├──────────────────────┤
+│ PK role_id           │
+│    role_name         │
+│    description       │
+└──────────┬───────────┘
+           │ 1
+           │
+           │ N
+┌──────────▼───────────┐
+│        users         │
+├──────────────────────┤
+│ PK user_id           │
+│ FK role_id           │
+│    username          │
+│    password          │
+│    fullname          │
+│    email             │
+│    phone             │
+│    status            │
+│    created_at        │
+└──────────┬───────────┘
+           │
+           │ 1
+           │
+           │ N
+┌──────────▼───────────┐
+│       bookings       │
+├──────────────────────┤
+│ PK booking_id        │
+│ FK user_id           │
+│ FK room_id           │
+│    booking_date      │
+│    start_time        │
+│    end_time          │
+│    purpose           │
+│    participant_count │
+│    status             │
+│    remark             │
+│    created_at        │
+└──────────┬───────────┘
+           │ N
+           │
+           │ 1
+┌──────────▼───────────┐
+│        rooms         │
+├──────────────────────┤
+│ PK room_id           │
+│    room_code         │
+│    room_name         │
+│    building          │
+│    floor             │
+│    capacity          │
+│    equipment         │
+│    status             │
+│    description       │
+└──────────────────────┘
+
+
+
+
+┌──────────────────────┐
+│   booking_approvals  │
+├──────────────────────┤
+│ PK approval_id       │
+│ FK booking_id        │
+│ FK approver_id       │
+│    approval_status   │
+│    comment           │
+│    approved_at       │
+└──────────┬───────────┘
+           │
+           │ N
+           │
+           │ 1
+      ┌────▼─────┐
+      │  users    │
+      │ Approver  │
+      └──────────┘
+2. ตาราง roles
+
+ใช้เก็บประเภทผู้ใช้งานและสิทธิ์หลักของระบบ
+
+Field	Type	รายละเอียด
+role_id	INT PK	รหัส Role
+role_name	VARCHAR(50)	ชื่อ Role
+description	VARCHAR(255)	รายละเอียด
+
+ตัวอย่างข้อมูล:
+
+role_id	role_name
+1	Admin
+2	Staff
+3	Approver
+4	User
+3. ตาราง users
+
+ใช้เก็บข้อมูลผู้ใช้งานสำหรับ Login และเชื่อมกับ Role
+
+Field	Type	Key
+user_id	INT	PK
+role_id	INT	FK
+username	VARCHAR(100)	UNIQUE
+password	VARCHAR(255)	
+fullname	VARCHAR(150)	
+email	VARCHAR(150)	
+phone	VARCHAR(20)	
+status	ENUM	
+created_at	DATETIME	
+
+ความสัมพันธ์:
+
+roles 1 ─────────── N users
+
+หมายความว่า 1 Role สามารถมีผู้ใช้งานหลายคน
+
+4. ตาราง rooms
+
+ใช้เก็บข้อมูลห้องที่สามารถนำมาจองได้
+
+Field	Type	Key
+room_id	INT	PK
+room_code	VARCHAR(50)	UNIQUE
+room_name	VARCHAR(150)	
+building	VARCHAR(100)	
+floor	VARCHAR(20)	
+capacity	INT	
+equipment	TEXT	
+status	ENUM	
+description	TEXT	
+
+ตัวอย่างสถานะ:
+
+available     = เปิดให้จอง
+maintenance   = ปิดปรับปรุง
+inactive      = ไม่ใช้งาน
+5. ตาราง bookings
+
+ตารางนี้เป็นหัวใจหลักของระบบ
+
+ใช้เก็บข้อมูลการจองห้อง
+
+Field	Type	Key
+booking_id	INT	PK
+user_id	INT	FK
+room_id	INT	FK
+booking_date	DATE	
+start_time	TIME	
+end_time	TIME	
+purpose	VARCHAR(255)	
+participant_count	INT	
+status	ENUM	
+remark	TEXT	
+created_at	DATETIME	
+
+สถานะที่แนะนำ:
+
+pending    = รออนุมัติ
+approved   = อนุมัติ
+rejected   = ไม่อนุมัติ
+cancelled  = ยกเลิก
+completed  = เสร็จสิ้น
+
+ความสัมพันธ์:
+
+users 1 ─────────── N bookings
+
+
+rooms 1 ─────────── N bookings
+
+ดังนั้น
+
+ผู้ใช้ 1 คน สามารถจองห้องได้หลายครั้ง
+ห้อง 1 ห้อง สามารถมีรายการจองหลายรายการในช่วงเวลาต่างกัน
+
+6. ตาราง booking_approvals
+
+ใช้เก็บข้อมูลการอนุมัติการจอง
+
+Field	Type	Key
+approval_id	INT	PK
+booking_id	INT	FK
+approver_id	INT	FK
+approval_status	ENUM	
+comment	TEXT	
+approved_at	DATETIME	
+
+ตัวอย่าง:
+
+approval_status
+
+
+pending
+approved
+rejected
+
+ความสัมพันธ์:
+
+bookings 1 ─────────── N booking_approvals
+
+
+users 1 ────────────── N booking_approvals
+
+โดย approver_id จะอ้างอิงไปยัง users.user_id
+
+7. ความสัมพันธ์ทั้งหมด
+
+สามารถสรุป ER-Diagram เป็นแบบนี้ได้
+
+                         ┌──────────────┐
+                         │    ROLES     │
+                         │──────────────│
+                         │ PK role_id   │
+                         │ role_name    │
+                         └──────┬───────┘
+                                │
+                                │ 1:N
+                                ▼
+                         ┌──────────────┐
+                         │    USERS     │
+                         │──────────────│
+                         │ PK user_id   │
+                         │ FK role_id   │
+                         │ username     │
+                         │ password     │
+                         │ fullname     │
+                         └───┬──────┬───┘
+                             │      │
+                           1:N      │ 1:N
+                             │      │
+                             ▼      ▼
+                    ┌────────────┐ ┌──────────────────┐
+                    │  BOOKINGS  │ │BOOKING_APPROVALS │
+                    │────────────│ │──────────────────│
+                    │PK booking_id│ │PK approval_id    │
+                    │FK user_id  │ │FK booking_id     │
+                    │FK room_id  │ │FK approver_id    │
+                    │booking_date│ │approval_status   │
+                    │start_time  │ │comment           │
+                    │end_time    │ │approved_at       │
+                    │status      │ └──────────────────┘
+                    └─────┬──────┘
+                          │
+                          │ N:1
+                          ▼
+                    ┌──────────────┐
+                    │    ROOMS     │
+                    │──────────────│
+                    │ PK room_id   │
+                    │ room_code    │
+                    │ room_name    │
+                    │ building     │
+                    │ capacity     │
+                    │ equipment    │
+                    │ status       │
+                    └──────────────┘
